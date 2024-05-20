@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 
-function NameCollection() {
+function NameCollection( {NameCollection} ) {
   return (
     <div>
       
