@@ -24,10 +24,30 @@ function WelcomePage() {
         babyName.name.toLowerCase().includes(search.toLowerCase())
       );
 
+      const addNewName = (nameData) => {
+        setBabyNames([...babyNames, nameData])
+
+        const newBabyNameObj = {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(dataToSend)
+        }
+
+        fetch ("http://localhost:3000/babyNames", newBabyNameObj)
+        .then(r => r.json())
+        .then(nameData => setBabyNames(nameData))
+      }
+
   return (
         <Container>
                 <h1>Here are some ideas for baby names!</h1>
+                    <br />
                     <Search search={search} handleChange={handleChange}/>
+                    <br />
+                    <NewNameForm addNewName={addNewName} />
+                    <br />
                     <NameCollection babyNames={filteredNames} />
         </Container>
   )
