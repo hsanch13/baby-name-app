@@ -27,8 +27,8 @@ function WelcomePage() {
   return (
         <Container>
                 <h1>Here are some ideas for baby names!</h1>
-                    <Search search={search} handleChange={handleChange}/>
                     <NameCollection babyNames={filteredNames} />
+                    <Search search={search} handleChange={handleChange}/>
         </Container>
   )
 }
