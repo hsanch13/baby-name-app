@@ -18,8 +18,7 @@ function NameCollection( {babyNames} ) {
   return (
 
     <div>
-      <h1>Here are some ideas for baby names!</h1>
-      <Card.Group itemsPerRow={1}>
+      <Card.Group itemsPerRow={5}>
       { babyNameCards }
       </Card.Group>
     </div>

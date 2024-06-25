@@ -4,7 +4,7 @@ import WelcomePage from "./WelcomePage"
 function App() {
 
   return (
-    <div className="App">
+   <div className="App">
       <WelcomePage />
     </div>
   );

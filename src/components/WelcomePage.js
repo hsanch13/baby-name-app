@@ -16,10 +16,20 @@ function WelcomePage() {
         .then(nameData => setBabyNames(nameData))
     }, [])
 
+    const handleChange = (e) => {
+        setSearch(e.target.value)
+    }
+
+    const filteredNames = babyNames.filter(babyName =>
+        babyName.name.toLowerCase().includes(search.toLowerCase())
+      );
+
   return (
-        <div>
-            <NameCollection babyNames={babyNames} />
-        </div>
+        <Container>
+                <h1>Here are some ideas for baby names!</h1>
+                    <Search search={search} handleChange={handleChange}/>
+                    <NameCollection babyNames={filteredNames} />
+        </Container>
   )
 }
 

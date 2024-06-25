@@ -6,7 +6,7 @@ function NameCard( {name, gender, popularity, image} ) {
     <Card>
     <div>
       <div className="image">
-        <img src={image} alt="baby foot" />
+        <img src={image} style={{width: "100%"}} alt="baby foot" />
       </div>
       <div className="content">
         <div className="header">{name}</div>
