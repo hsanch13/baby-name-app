@@ -17,17 +17,43 @@ function WelcomePage() {
     }, [])
 
     const handleSortByGender = () => {
-        const sortedNames = [...babyNames].sort((a, b) => {
+        const sortedGender = [...babyNames].sort((a, b) => {
           if (a.gender < b.gender) {
-            return -1;
+            return -1
           }
           if (a.gender > b.gender) {
-            return 1;
+            return 1
           }
-          return 0;
+          return 0
         });
-        setBabyNames(sortedNames);
+        setBabyNames(sortedGender);
       };
+
+    const handleSortByPopularity = () => {
+        const sortedPopNames = [...babyNames].sort((a, b) => {
+          if (a.popularity < b.popularity) {
+            return -1
+          }
+          if (a.popularity > b.popularity) {
+            return 1
+          }
+          return 0
+        })
+        setBabyNames(sortedPopNames)
+  };
+
+    const handleSortByAlpha = () => {
+        const sortedAlphaNames = [...babyNames].sort((a, b) => {
+            if (a.name < b.name) {
+                return -1
+            }
+            if (a.name > b.name) {
+                return 1
+            }
+            return 0
+        })
+        setBabyNames(sortedAlphaNames)
+    }
 
     const handleChange = (e) => {
         setSearch(e.target.value)
@@ -55,13 +81,15 @@ function WelcomePage() {
 
   return (
         <Container>
-            <h1>Here are some ideas for baby names!</h1>
+            <h1>Congrats on the babe! Here are ideas for names</h1>
                 <br />
                 <Search search={search} handleChange={handleChange}/>
                 <br />
                 <NewNameForm addNewName={addNewName} />
                 <br />
-                <Button onClick={handleSortByGender} >Sort By Gender</Button>
+                <Button onClick={handleSortByAlpha} >Sort Names In Alphabetical Order</Button>
+                <Button onClick={handleSortByPopularity} >Sort Names By Popularity</Button>
+                <Button onClick={handleSortByGender} >Sort Names By Gender</Button>
                 <br />
                 <NameCollection babyNames={filteredNames} />
         </Container>
