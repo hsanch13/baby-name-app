@@ -10,8 +10,6 @@ function WelcomePage() {
 
     const [search, setSearch] = useState("")
 
-    const [isSortedByGender, setIsSortedByGender] = useState(false)
-
     useEffect(() => {
         fetch("http://localhost:3000/babyNames")
         .then(r => r.json())
@@ -19,10 +17,17 @@ function WelcomePage() {
     }, [])
 
     const handleSortByGender = () => {
-        const sortedGender = [...babyNames].sort((a, b) => a.gender.localeCompare(b.gender))
-        setBabyNames(sortedGender)
-        setIsSortedByGender(true)
-    }
+        const sortedNames = [...babyNames].sort((a, b) => {
+          if (a.gender < b.gender) {
+            return -1;
+          }
+          if (a.gender > b.gender) {
+            return 1;
+          }
+          return 0;
+        });
+        setBabyNames(sortedNames);
+      };
 
     const handleChange = (e) => {
         setSearch(e.target.value)
