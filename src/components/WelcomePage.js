@@ -8,16 +8,21 @@ function WelcomePage() {
 
     const [babyNames, setBabyNames] = useState([])
 
+    const [babyData, setBabyData] = useState([])
+
     const [search, setSearch] = useState("")
 
     useEffect(() => {
         fetch("http://localhost:3000/babyNames")
         .then(r => r.json())
-        .then(nameData => setBabyNames(nameData))
+        .then(nameData => {
+            setBabyNames(nameData)
+            setBabyData(nameData)
+        })
     }, [])
 
     const handleSortByGender = () => {
-        const sortedGender = [...babyNames].sort((a, b) => {
+        const sortedGender = [...babyData].sort((a, b) => {
           if (a.gender < b.gender) {
             return -1
           }
@@ -30,20 +35,21 @@ function WelcomePage() {
       };
 
     const handleSortByPopularity = () => {
-        const sortedPopNames = [...babyNames].sort((a, b) => {
-          if (a.popularity < b.popularity) {
-            return -1
-          }
-          if (a.popularity > b.popularity) {
-            return 1
-          }
-          return 0
+        const sortedPopNames = [...babyData].sort((a, b) => {
+            const popularity = {"high": 0, "medium": 1, "low": 2}
+            if (popularity[a.popularity] < popularity[b.popularity]) {
+                return -1
+             }
+            if (popularity[a.popularity] > popularity[b.popularity]) {
+                return 1
+            }
+                return 0
         })
         setBabyNames(sortedPopNames)
   };
 
     const handleSortByAlpha = () => {
-        const sortedAlphaNames = [...babyNames].sort((a, b) => {
+        const sortedAlphaNames = [...babyData].sort((a, b) => {
             if (a.name < b.name) {
                 return -1
             }
@@ -64,8 +70,9 @@ function WelcomePage() {
       );
 
     const addNewName = (nameData) => {
-        setBabyNames([...babyNames, nameData])
-
+        const newId = Math.max(...babyData.map(baby => baby.id)) + 1
+        nameData["id"] = newId
+        
     const newBabyNameObj = {
         method: "POST",
         headers: {
@@ -76,7 +83,10 @@ function WelcomePage() {
 
     fetch ("http://localhost:3000/babyNames", newBabyNameObj)
     .then(r => r.json())
-    .then((newName) => setBabyNames((prevBabyNames) => [...prevBabyNames, newName]))
+    .then((newName) => {
+        setBabyNames([...babyNames, newName])
+        setBabyData([...babyData, newName])
+    })
     }
 
   return (
