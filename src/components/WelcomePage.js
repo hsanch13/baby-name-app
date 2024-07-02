@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react'
 import NameCollection from "./NameCollection"
 import NewNameForm from "./NewNameForm"
 import Search from "./Search"
-import { Container } from "semantic-ui-react";
+import { Button, Container } from "semantic-ui-react";
 
 function WelcomePage() {
 
@@ -10,11 +10,19 @@ function WelcomePage() {
 
     const [search, setSearch] = useState("")
 
+    const [isSortedByGender, setIsSortedByGender] = useState(false)
+
     useEffect(() => {
         fetch("http://localhost:3000/babyNames")
         .then(r => r.json())
         .then(nameData => setBabyNames(nameData))
     }, [])
+
+    const handleSortByGender = () => {
+        const sortedGender = [...babyNames].sort((a, b) => a.gender.localeCompare(b.gender))
+        setBabyNames(sortedGender)
+        setIsSortedByGender(true)
+    }
 
     const handleChange = (e) => {
         setSearch(e.target.value)
@@ -24,31 +32,33 @@ function WelcomePage() {
         babyName.name.toLowerCase().includes(search.toLowerCase())
       );
 
-      const addNewName = (nameData) => {
+    const addNewName = (nameData) => {
         setBabyNames([...babyNames, nameData])
 
-        const newBabyNameObj = {
-            method: "POST",
-            headers: {
+    const newBabyNameObj = {
+        method: "POST",
+        headers: {
                 "Content-Type": "application/json"
-            },
-            body: JSON.stringify(dataToSend)
-        }
+        },
+        body: JSON.stringify(nameData)
+    }
 
-        fetch ("http://localhost:3000/babyNames", newBabyNameObj)
-        .then(r => r.json())
-        .then(nameData => setBabyNames(nameData))
-      }
+    fetch ("http://localhost:3000/babyNames", newBabyNameObj)
+    .then(r => r.json())
+    .then((newName) => setBabyNames((prevBabyNames) => [...prevBabyNames, newName]))
+    }
 
   return (
         <Container>
-                <h1>Here are some ideas for baby names!</h1>
-                    <br />
-                    <Search search={search} handleChange={handleChange}/>
-                    <br />
-                    <NewNameForm addNewName={addNewName} />
-                    <br />
-                    <NameCollection babyNames={filteredNames} />
+            <h1>Here are some ideas for baby names!</h1>
+                <br />
+                <Search search={search} handleChange={handleChange}/>
+                <br />
+                <NewNameForm addNewName={addNewName} />
+                <br />
+                <Button onClick={handleSortByGender} >Sort By Gender</Button>
+                <br />
+                <NameCollection babyNames={filteredNames} />
         </Container>
   )
 }
