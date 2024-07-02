@@ -91,6 +91,7 @@ function WelcomePage() {
                 <Button onClick={handleSortByPopularity} >Sort Names By Popularity</Button>
                 <Button onClick={handleSortByGender} >Sort Names By Gender</Button>
                 <br />
+                <br />
                 <NameCollection babyNames={filteredNames} />
         </Container>
   )
