@@ -8,7 +8,7 @@ function WelcomePage() {
 
     const [babyNames, setBabyNames] = useState([])
 
-    // const [babyData, setBabyData] = useState([])
+    const [babyData, setBabyData] = useState([])
 
     const [search, setSearch] = useState("")
 
@@ -17,7 +17,7 @@ function WelcomePage() {
         .then(r => r.json())
         .then(nameData => {
             setBabyNames(nameData)
-            // setBabyData(nameData)
+            setBabyData(nameData)
         })
     }, [])
 
