@@ -8,17 +8,12 @@ function WelcomePage() {
 
     const [babyNames, setBabyNames] = useState([])
 
-    const [babyData, setBabyData] = useState([])
-
     const [search, setSearch] = useState("")
 
     useEffect(() => {
         fetch("http://localhost:3000/babyNames")
         .then(r => r.json())
-        .then(nameData => {
-            setBabyNames(nameData)
-            setBabyData(nameData)
-        })
+        .then(nameData => setBabyNames(nameData))
     }, [])
 
     const handleSortByGender = () => {
