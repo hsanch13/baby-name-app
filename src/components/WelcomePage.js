@@ -8,7 +8,7 @@ function WelcomePage() {
 
     const [babyNames, setBabyNames] = useState([])
 
-    const [babyData, setBabyData] = useState([])
+    // const [babyData, setBabyData] = useState([])
 
     const [search, setSearch] = useState("")
 
@@ -17,12 +17,12 @@ function WelcomePage() {
         .then(r => r.json())
         .then(nameData => {
             setBabyNames(nameData)
-            setBabyData(nameData)
+            // setBabyData(nameData)
         })
     }, [])
 
     const handleSortByGender = () => {
-        const sortedGender = [...babyData].sort((a, b) => {
+        const sortedGender = [...babyNames].toSorted((a, b) => {
           if (a.gender < b.gender) {
             return -1
           }
@@ -35,7 +35,7 @@ function WelcomePage() {
       };
 
     const handleSortByPopularity = () => {
-        const sortedPopNames = [...babyData].sort((a, b) => {
+        const sortedPopNames = [...babyNames].toSorted((a, b) => {
             const popularity = {"high": 0, "medium": 1, "low": 2}
             if (popularity[a.popularity] < popularity[b.popularity]) {
                 return -1
@@ -49,7 +49,7 @@ function WelcomePage() {
   };
 
     const handleSortByAlpha = () => {
-        const sortedAlphaNames = [...babyData].sort((a, b) => {
+        const sortedAlphaNames = [...babyNames].toSorted((a, b) => {
             if (a.name < b.name) {
                 return -1
             }
@@ -70,8 +70,8 @@ function WelcomePage() {
       );
 
     const addNewName = (nameData) => {
-        const newId = Math.max(...babyData.map(baby => baby.id)) + 1
-        nameData["id"] = newId
+        // const newId = Math.max(...babyData.map(baby => baby.id)) + 1
+        // nameData["id"] = newId
         
     const newBabyNameObj = {
         method: "POST",
@@ -85,7 +85,7 @@ function WelcomePage() {
     .then(r => r.json())
     .then((newName) => {
         setBabyNames([...babyNames, newName])
-        setBabyData([...babyData, newName])
+        // setBabyData([...babyData, newName])
     })
     }
 
