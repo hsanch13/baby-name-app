@@ -65,8 +65,6 @@ function WelcomePage() {
       );
 
     const addNewName = (nameData) => {
-        const newId = Math.max(...babyData.map(baby => baby.id)) + 1
-        nameData["id"] = newId
         
     const newBabyNameObj = {
         method: "POST",
