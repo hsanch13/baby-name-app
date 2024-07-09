@@ -1,6 +1,7 @@
 import React from "react";
-import WelcomePage from "./WelcomePage"
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import WelcomePage from "./WelcomePage"
+import NewNameForm from "./NewNameForm";
 
 function App() {
 
@@ -9,6 +10,7 @@ function App() {
       <div className="App">
         <Routes>
           <Route path="/" element={<WelcomePage />} />
+          <Route path="/addNewName" element={<NewNameForm />} />
         </Routes>
       </div>
     </Router>
