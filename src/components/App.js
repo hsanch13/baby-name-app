@@ -34,6 +34,11 @@ function App() {
   return (
     <Router>
       <div className="App">
+      <nav>
+          <Link to="/" className="nav-link">Home</Link>
+          <Link to="/addNewName" className="nav-link">Add New Name</Link>
+          <Link to="/search" className="nav-link">Search</Link>
+        </nav>
         <Routes>
           <Route
             path="/"
