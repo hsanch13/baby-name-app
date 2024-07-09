@@ -1,8 +1,8 @@
-import React, {useState} from 'react'
+import React from 'react'
 import NameCard from './NameCard'
 import { Card } from "semantic-ui-react";
 
-function NameCollection( {babyNames} ) {
+function NameCollection({ babyNames }) {
 
   const babyNameCards = babyNames.map(babyName => {
     return (
@@ -19,7 +19,7 @@ function NameCollection( {babyNames} ) {
 
     <div>
       <Card.Group itemsPerRow={5}>
-      { babyNameCards }
+        {babyNameCards}
       </Card.Group>
     </div>
   )

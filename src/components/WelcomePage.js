@@ -1,20 +1,10 @@
-import React, {useState, useEffect} from 'react'
+import React from 'react'
 import NameCollection from "./NameCollection"
 import NewNameForm from "./NewNameForm"
 import Search from "./Search"
 import { Button, Container } from "semantic-ui-react";
 
-function WelcomePage() {
-
-    const [babyNames, setBabyNames] = useState([])
-
-    const [search, setSearch] = useState("")
-
-    useEffect(() => {
-        fetch("http://localhost:3000/babyNames")
-        .then(r => r.json())
-        .then(nameData => setBabyNames(nameData))
-    }, [])
+function WelcomePage({ babyNames, setSearch, search, setBabyNames }) {
 
     const handleSortByGender = () => {
         const sortedGender = [...babyNames].toSorted((a, b) => {
@@ -64,30 +54,11 @@ function WelcomePage() {
         babyName.name.toLowerCase().includes(search.toLowerCase())
       );
 
-    const addNewName = (nameData) => {
-
-    const newBabyNameObj = {
-        method: "POST",
-        headers: {
-                "Content-Type": "application/json"
-        },
-        body: JSON.stringify(nameData)
-    }
-
-    fetch ("http://localhost:3000/babyNames", newBabyNameObj)
-    .then(r => r.json())
-    .then((newName) => {
-        setBabyNames([...babyNames, newName])
-    })
-    }
-
   return (
         <Container>
             <h1>Congrats on the babe! Here are ideas for names</h1>
                 <br />
                 <Search search={search} handleChange={handleChange}/>
-                <br />
-                <NewNameForm addNewName={addNewName} />
                 <br />
                 <Button onClick={handleSortByAlpha} >Sort Names In Alphabetical Order</Button>
                 <Button onClick={handleSortByPopularity} >Sort Names By Popularity</Button>

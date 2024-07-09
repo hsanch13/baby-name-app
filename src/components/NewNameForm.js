@@ -22,7 +22,6 @@ function NewNameForm({ addNewName }) {
       <Form
         onSubmit={(e) => {
           e.preventDefault()
-          console.log("submitting form...")
           addNewName(formData)
         }}
       >
