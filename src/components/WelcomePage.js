@@ -65,7 +65,7 @@ function WelcomePage() {
       );
 
     const addNewName = (nameData) => {
-        
+
     const newBabyNameObj = {
         method: "POST",
         headers: {
@@ -78,7 +78,6 @@ function WelcomePage() {
     .then(r => r.json())
     .then((newName) => {
         setBabyNames([...babyNames, newName])
-        // setBabyData([...babyData, newName])
     })
     }
 
