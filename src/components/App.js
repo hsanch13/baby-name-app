@@ -2,6 +2,7 @@ import React , {useState, useEffect} from "react";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import WelcomePage from "./WelcomePage"
 import NewNameForm from "./NewNameForm";
+import Search from "./Search";
 
 function App() {
   const [babyNames, setBabyNames] = useState([])
@@ -46,6 +47,7 @@ function App() {
             } 
           />
           <Route path="/addNewName" element={<NewNameForm addNewName={addNewName}/>} />
+          <Route path="/search" element={<Search search={search} handleChange={setSearch} />} />
         </Routes>
       </div>
     </Router>
