@@ -1,10 +1,9 @@
 import React from 'react'
 import NameCollection from "./NameCollection"
-import NewNameForm from "./NewNameForm"
 import Search from "./Search"
 import { Button, Container } from "semantic-ui-react";
 
-function WelcomePage({ babyNames, setSearch, search, setBabyNames }) {
+function WelcomePage({ babyNames, setBabyNames, search, setSearch }) {
 
     const handleSortByGender = () => {
         const sortedGender = [...babyNames].toSorted((a, b) => {
@@ -28,7 +27,7 @@ function WelcomePage({ babyNames, setSearch, search, setBabyNames }) {
             if (popularity[a.popularity] > popularity[b.popularity]) {
                 return 1
             }
-                return 0
+            return 0
         })
         setBabyNames(sortedPopNames)
   };
@@ -46,8 +45,8 @@ function WelcomePage({ babyNames, setSearch, search, setBabyNames }) {
         setBabyNames(sortedAlphaNames)
     }
 
-    const handleChange = (e) => {
-        setSearch(e.target.value)
+    const handleChange = (value) => {
+        setSearch(value)
     }
 
     const filteredNames = babyNames.filter(babyName =>

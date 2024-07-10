@@ -29,7 +29,7 @@ function App() {
       .then((newName) => {
           setBabyNames([...babyNames, newName])
       })
-      }
+    }
 
   return (
     <Router>
