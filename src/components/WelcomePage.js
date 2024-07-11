@@ -54,7 +54,7 @@ function WelcomePage({ babyNames, setBabyNames, search, setSearch }) {
                 <Button onClick={handleSortByGender} >Sort Names By Gender</Button>
                 <br />
                 <br />
-                <NameCollection babyNames={babyNames} search={search} />
+                <NameCollection babyNames={babyNames} search={""} />
         </Container>
   )
 }

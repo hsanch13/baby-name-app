@@ -28,6 +28,7 @@ function App() {
     .then(r => r.json())
     .then((newName) => {
       setBabyNames([...babyNames, newName])
+      window.location.href = "/"
     })
   }
   

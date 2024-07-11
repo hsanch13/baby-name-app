@@ -22,6 +22,10 @@
   font-size: large;
 }
 
+nav{
+  margin-bottom: 20px;
+}
+
 .nav-links {
   display: flex;
   justify-content: space-around;
@@ -41,4 +45,8 @@
 .nav-link:hover {
   background-color: #ddd; 
   color: #555; 
+}
+
+.input {
+  margin: 0px 0 15px 0;
 }
