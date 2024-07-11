@@ -2,9 +2,13 @@ import React from 'react'
 import NameCard from './NameCard'
 import { Card } from "semantic-ui-react";
 
-function NameCollection({ babyNames }) {
+function NameCollection({ search, babyNames }) {
 
-  const babyNameCards = babyNames.map(babyName => {
+  const filteredNames = babyNames.filter(babyName =>
+    babyName.name.toLowerCase().includes(search.toLowerCase())
+  );
+
+  const babyNameCards = filteredNames.map(babyName => {
     return (
       <NameCard 
         key={babyName.id}

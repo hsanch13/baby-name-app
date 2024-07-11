@@ -45,26 +45,16 @@ function WelcomePage({ babyNames, setBabyNames, search, setSearch }) {
         setBabyNames(sortedAlphaNames)
     }
 
-    const handleChange = (value) => {
-        setSearch(value)
-    }
-
-    const filteredNames = babyNames.filter(babyName =>
-        babyName.name.toLowerCase().includes(search.toLowerCase())
-      );
-
   return (
         <Container>
             <h1>Congrats on the babe! Here are ideas for names</h1>
-                <br />
-                <Search search={search} handleChange={handleChange}/>
                 <br />
                 <Button onClick={handleSortByAlpha} >Sort Names In Alphabetical Order</Button>
                 <Button onClick={handleSortByPopularity} >Sort Names By Popularity</Button>
                 <Button onClick={handleSortByGender} >Sort Names By Gender</Button>
                 <br />
                 <br />
-                <NameCollection babyNames={filteredNames} />
+                <NameCollection babyNames={babyNames} search={search} />
         </Container>
   )
 }

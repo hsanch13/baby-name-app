@@ -7,7 +7,7 @@ import Search from "./Search";
 function App() {
   const [babyNames, setBabyNames] = useState([])
 
-    const [search, setSearch] = useState("")
+  const [search, setSearch] = useState("")
 
     useEffect(() => {
         fetch("http://localhost:3000/babyNames")
@@ -23,14 +23,14 @@ function App() {
           },
           body: JSON.stringify(nameData)
       }
+    
+    fetch ("http://localhost:3000/babyNames", newBabyNameObj)
+    .then(r => r.json())
+    .then((newName) => {
+      setBabyNames([...babyNames, newName])
+    })
+  }
   
-      fetch ("http://localhost:3000/babyNames", newBabyNameObj)
-      .then(r => r.json())
-      .then((newName) => {
-          setBabyNames([...babyNames, newName])
-      })
-    }
-
   return (
     <Router>
       <div className="App">
@@ -52,7 +52,16 @@ function App() {
             } 
           />
           <Route path="/addNewName" element={<NewNameForm addNewName={addNewName}/>} />
-          <Route path="/search" element={<Search search={search} handleChange={setSearch} />} />
+          <Route
+            path="/search"
+            element={
+              <Search
+                babyNames={babyNames}
+                search={search}
+                handleChange={setSearch}
+              />
+            }
+          />
         </Routes>
       </div>
     </Router>
