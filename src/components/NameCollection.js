@@ -16,6 +16,7 @@ function NameCollection({ search, babyNames, sortByGender }) {
     }
     return 0
   })
+  
   const names = sortByGender ? sortedGender : filteredNames
 
   const babyNameCards = names.map(babyName => {
