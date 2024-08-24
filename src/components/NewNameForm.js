@@ -1,7 +1,8 @@
 import React, {useState} from 'react'
+import { useNavigate } from "react-router-dom";
 import { Form } from "semantic-ui-react"
 
-function NewNameForm({ addNewName }) {
+function NewNameForm({ setBabyNames, babyNames }) {
   const defaultState = {
     name: "",
     gender: "",
@@ -9,12 +10,31 @@ function NewNameForm({ addNewName }) {
     image: ""
   }
 
+  const navigate = useNavigate()
+
   const [formData, setFormData] = useState(defaultState)
   
   const handleChange = (e) => {
     const {name, value} = e.target
     setFormData({...formData, [name]: value})
   }
+
+  const addNewName = (nameData) => {
+    const newBabyNameObj = {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(nameData)
+    }
+  
+  fetch ("http://localhost:3000/babyNames", newBabyNameObj)
+  .then(r => r.json())
+  .then((newName) => {
+    setBabyNames([...babyNames, newName])
+    navigate("/")
+  })
+}
 
   return (
     <div>

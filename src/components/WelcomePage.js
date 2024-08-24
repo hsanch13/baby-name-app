@@ -1,21 +1,11 @@
 import React from 'react'
 import NameCollection from "./NameCollection"
-import Search from "./Search"
 import { Button, Container } from "semantic-ui-react";
 
-function WelcomePage({ babyNames, setBabyNames, search, setSearch }) {
+function WelcomePage({ babyNames, setBabyNames, sortByGender, setSortByGender }) {
 
     const handleSortByGender = () => {
-        const sortedGender = [...babyNames].toSorted((a, b) => {
-          if (a.gender < b.gender) {
-            return -1
-          }
-          if (a.gender > b.gender) {
-            return 1
-          }
-          return 0
-        });
-        setBabyNames(sortedGender);
+        setSortByGender(!sortByGender)
       };
 
     const handleSortByPopularity = () => {
@@ -34,10 +24,10 @@ function WelcomePage({ babyNames, setBabyNames, search, setSearch }) {
 
     const handleSortByAlpha = () => {
         const sortedAlphaNames = [...babyNames].toSorted((a, b) => {
-            if (a.name < b.name) {
+            if (a.name < b.name.toLowerCase()) {
                 return -1
             }
-            if (a.name > b.name) {
+            if (a.name > b.name.toLowerCase()) {
                 return 1
             }
             return 0
@@ -51,10 +41,13 @@ function WelcomePage({ babyNames, setBabyNames, search, setSearch }) {
                 <br />
                 <Button onClick={handleSortByAlpha} >Sort Names In Alphabetical Order</Button>
                 <Button onClick={handleSortByPopularity} >Sort Names By Popularity</Button>
-                <Button onClick={handleSortByGender} >Sort Names By Gender</Button>
+                <Button onClick={handleSortByGender} > {`${sortByGender ? "Unsort" : "Sort"}  Names By Gender`}</Button>
                 <br />
                 <br />
-                <NameCollection babyNames={babyNames} search={""} />
+                <NameCollection babyNames={babyNames}
+                 search={""}
+                 sortByGender={sortByGender}
+                />
         </Container>
   )
 }

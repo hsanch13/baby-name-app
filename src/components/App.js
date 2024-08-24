@@ -1,13 +1,16 @@
 import React , {useState, useEffect} from "react";
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Link} from "react-router-dom";
 import WelcomePage from "./WelcomePage"
 import NewNameForm from "./NewNameForm";
 import Search from "./Search";
 
 function App() {
+
   const [babyNames, setBabyNames] = useState([])
 
   const [search, setSearch] = useState("")
+
+  const [sortByGender, setSortByGender] = useState(true)
 
     useEffect(() => {
         fetch("http://localhost:3000/babyNames")
@@ -15,22 +18,6 @@ function App() {
         .then(nameData => setBabyNames(nameData))
     }, [])
 
-    const addNewName = (nameData) => {
-      const newBabyNameObj = {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify(nameData)
-      }
-    
-    fetch ("http://localhost:3000/babyNames", newBabyNameObj)
-    .then(r => r.json())
-    .then((newName) => {
-      setBabyNames([...babyNames, newName])
-      window.location.href = "/"
-    })
-  }
   
   return (
     <Router>
@@ -47,12 +34,12 @@ function App() {
               <WelcomePage
                 babyNames={babyNames}
                 setBabyNames={setBabyNames} 
-                search={search}
-                setSearch={setSearch}
+                sortByGender={sortByGender}
+                setSortByGender={setSortByGender}
               />
             } 
           />
-          <Route path="/addNewName" element={<NewNameForm addNewName={addNewName}/>} />
+          <Route path="/addNewName" element={<NewNameForm babyNames={babyNames} setBabyNames={setBabyNames}/>} />
           <Route
             path="/search"
             element={
@@ -60,6 +47,7 @@ function App() {
                 babyNames={babyNames}
                 search={search}
                 handleChange={setSearch}
+                sortByGender={sortByGender}
               />
             }
           />
