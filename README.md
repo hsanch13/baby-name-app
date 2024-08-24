@@ -51,3 +51,5 @@ This project is structured into the following components:
 - Semantic UI React: Used for styling and responsive design.
 - React Router: Used for managing app routes.
 - Baby Names Data: Data used in this app came from the United States Social Security Administration
+
+If you find this project helpful, feel free to check out my [blog post](https://medium.com/@hayleysanchez/understanding-the-difference-between-filter-and-map-in-react-an-example-from-the-baby-names-app-c4a4700aa71e) where I discuss the development process in detail.
