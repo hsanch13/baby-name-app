@@ -3,6 +3,7 @@ import NameCard from './NameCard'
 import { Card } from "semantic-ui-react";
 
 function NameCollection({ search, babyNames, sortByGender }) {
+  
   const filteredNames = babyNames.filter(babyName =>
     babyName.name.toLowerCase().includes(search.toLowerCase())
   );
@@ -16,7 +17,7 @@ function NameCollection({ search, babyNames, sortByGender }) {
     }
     return 0
   })
-  
+
   const names = sortByGender ? sortedGender : filteredNames
 
   const babyNameCards = names.map(babyName => {

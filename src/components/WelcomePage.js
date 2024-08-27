@@ -24,10 +24,10 @@ function WelcomePage({ babyNames, setBabyNames, sortByGender, setSortByGender })
 
     const handleSortByAlpha = () => {
         const sortedAlphaNames = [...babyNames].toSorted((a, b) => {
-            if (a.name < b.name.toLowerCase()) {
+            if (a.name < b.name) {
                 return -1
             }
-            if (a.name > b.name.toLowerCase()) {
+            if (a.name > b.name) {
                 return 1
             }
             return 0

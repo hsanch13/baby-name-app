@@ -12,11 +12,11 @@ function App() {
 
   const [sortByGender, setSortByGender] = useState(true)
 
-    useEffect(() => {
-        fetch("http://localhost:3000/babyNames")
-        .then(r => r.json())
-        .then(nameData => setBabyNames(nameData))
-    }, [])
+  useEffect(() => {
+      fetch("http://localhost:3000/babyNames")
+      .then(r => r.json())
+      .then(nameData => setBabyNames(nameData))
+  }, [])
 
   
   return (
